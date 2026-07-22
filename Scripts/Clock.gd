@@ -1,7 +1,10 @@
 extends Sprite2D
 
+@export var Tick_start_time = 30
+@export var scale_start_time = 15
+
 var second = 0
-var time = 60
+var time = 60.0
 
 var current_tween : Tween
 
@@ -29,26 +32,36 @@ func time_update(type):
 	current_tween = create_tween()
 
 	if type == "normal":
-		if time <= 50:
+		if time <= Tick_start_time:
 			current_tween.set_trans(Tween.TRANS_ELASTIC)
 		else:
 			current_tween.set_trans(Tween.TRANS_LINEAR)
 		
 		current_tween.tween_property(
-			$Sprite2D,
+			$Second_hand,
 			"rotation",
 			deg_to_rad(time * 6),
 			1
 		)
+		
+		if time <= scale_start_time and time != 0:
+			current_tween.parallel()
+			current_tween.tween_property(
+				self,
+				"scale",
+				Vector2( scale_start_time/time , scale_start_time/time ),
+				1
+			)
+		
 		print(time)
 		
 	elif type == "edit":
 		current_tween.set_trans(Tween.TRANS_LINEAR)
 		
 		current_tween.tween_property(
-			$Sprite2D,
+			$Second_hand,
 			"rotation",
 			deg_to_rad(time * 6),
 			0.5
 		)
-		#I WILL CRYYYY123
+		#I WILL CRYYYY

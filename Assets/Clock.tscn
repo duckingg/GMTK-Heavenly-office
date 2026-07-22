@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dxkokcej7bbgl"]
+
+[ext_resource type="Texture2D" uid="uid://c358y8ffhdofm" path="res://icon.svg" id="1_r3var"]
+[ext_resource type="Script" uid="uid://ckpfbpuv07ouw" path="res://Scripts/Clock.gd" id="2_qj2jc"]
+
+[node name="Clock" type="Sprite2D" unique_id=993132611]
+texture = ExtResource("1_r3var")
+script = ExtResource("2_qj2jc")
+
+[node name="Second_hand" type="Sprite2D" parent="." unique_id=2104889403]
+scale = Vector2(0.1953125, 1)
+texture = ExtResource("1_r3var")

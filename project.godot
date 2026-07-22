@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GMTK angle job"
-run/main_scene="res://sprite_2d.tscn"
+run/main_scene="uid://c6bdegeb7h14v"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
