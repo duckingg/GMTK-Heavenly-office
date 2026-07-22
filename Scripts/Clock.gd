@@ -7,14 +7,19 @@ var second = 0
 var time = 60.0
 
 var current_tween : Tween
+var editing = false
 
 func _process(delta):
-	second += delta
-	
-	if second >= 1:
-		second = 0
-		time -= 1
-		time_update("normal")
+	if editing == true:
+		second = 1
+		
+	if editing == false:
+		second += delta
+		
+		if second >= 1:
+			second = 0
+			time -= 1
+			time_update("normal")
 	
 	if Input.is_action_just_pressed("ui_up"):
 		time += 10
@@ -44,7 +49,7 @@ func time_update(type):
 			1
 		)
 		
-		if time <= scale_start_time and time != 0:
+		if time <= scale_start_time and time > scale_start_time / 5.0:
 			current_tween.parallel()
 			current_tween.tween_property(
 				self,
@@ -56,12 +61,14 @@ func time_update(type):
 		print(time)
 		
 	elif type == "edit":
+		editing = true
 		current_tween.set_trans(Tween.TRANS_LINEAR)
 		
-		current_tween.tween_property(
+		await current_tween.tween_property(
 			$Second_hand,
 			"rotation",
 			deg_to_rad(time * 6),
 			0.5
-		)
+		).finished
+		editing = false
 		#I WILL CRYYYY

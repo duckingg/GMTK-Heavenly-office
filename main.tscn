@@ -7,3 +7,4 @@
 [node name="Clock" parent="." unique_id=993132611 instance=ExtResource("1_ig7tw")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1578918322]
+zoom = Vector2(2, 2)
