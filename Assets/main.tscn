@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c6bdegeb7h14v"]
+
+[ext_resource type="PackedScene" uid="uid://dxkokcej7bbgl" path="res://Assets/Clock.tscn" id="1_fhhcb"]
+[ext_resource type="Script" uid="uid://cdxhhdxtrfjvn" path="res://Assets/main.gd" id="1_yjg56"]
+[ext_resource type="PackedScene" uid="uid://dlj0qwyskaxbk" path="res://Assets/spawner.tscn" id="3_h46cc"]
+
+[node name="Main" type="Node2D" unique_id=1772978284]
+script = ExtResource("1_yjg56")
+
+[node name="Clock" parent="." unique_id=993132611 instance=ExtResource("1_fhhcb")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1578918322]
+zoom = Vector2(2, 2)
+
+[node name="Spawner" parent="." unique_id=569710735 instance=ExtResource("3_h46cc")]
+position = Vector2(174, -2)

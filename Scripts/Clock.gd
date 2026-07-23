@@ -3,15 +3,20 @@ extends Sprite2D
 @export var Tick_start_time = 30
 @export var scale_start_time = 15
 
+@onready var second_hand = $Second_hand
+
 var second = 0
 var time = 60.0
 
 var current_tween : Tween
 var editing = false
 
+func _ready() -> void:
+	print(get_children())
+
 func _process(delta):
 	if editing == true:
-		second = 1
+		second = 0.9
 		
 	if editing == false:
 		second += delta
@@ -32,9 +37,11 @@ func _process(delta):
 
 func time_update(type):
 	if current_tween:
+		#print("Killing tween:", current_tween.get_instance_id())
 		current_tween.kill()
 
 	current_tween = create_tween()
+	#print("Created tween:", current_tween.get_instance_id(), " type:", type)
 
 	if type == "normal":
 		if time <= Tick_start_time:
@@ -43,10 +50,10 @@ func time_update(type):
 			current_tween.set_trans(Tween.TRANS_LINEAR)
 		
 		current_tween.tween_property(
-			$Second_hand,
+			second_hand,
 			"rotation",
 			deg_to_rad(time * 6),
-			1
+			0.9
 		)
 		
 		if time <= scale_start_time and time > scale_start_time / 5.0:
@@ -55,7 +62,15 @@ func time_update(type):
 				self,
 				"scale",
 				Vector2( scale_start_time/time , scale_start_time/time ),
-				1
+				0.9
+			)
+		elif time > scale_start_time:
+			current_tween.parallel()
+			current_tween.tween_property(
+				self,
+				"scale",
+				Vector2( 1, 1 ),
+				0.9
 			)
 		
 		print(time)
@@ -64,11 +79,14 @@ func time_update(type):
 		editing = true
 		current_tween.set_trans(Tween.TRANS_LINEAR)
 		
-		await current_tween.tween_property(
-			$Second_hand,
+		current_tween.tween_property(
+			second_hand,
 			"rotation",
 			deg_to_rad(time * 6),
 			0.5
-		).finished
+		)
+		
+		await current_tween.finished
+		
 		editing = false
 		#I WILL CRYYYY

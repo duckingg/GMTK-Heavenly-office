@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dax3icskph0gg"]
+
+[ext_resource type="Script" uid="uid://djaeapxfpigw4" path="res://Assets/minigame_1.gd" id="1_usdcs"]
+[ext_resource type="PackedScene" uid="uid://dlj0qwyskaxbk" path="res://Assets/spawner.tscn" id="1_wvewk"]
+
+[node name="Minigame1" type="Node2D" unique_id=1364003204]
+script = ExtResource("1_usdcs")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=63239591]
+
+[node name="spawners" type="Node" parent="." unique_id=320340510]
+
+[node name="Spawner" parent="spawners" unique_id=569710735 instance=ExtResource("1_wvewk")]
+position = Vector2(-520, -123)
+
+[node name="Spawner2" parent="spawners" unique_id=1845525210 instance=ExtResource("1_wvewk")]
+position = Vector2(-524, 3)
+
+[node name="Spawner3" parent="spawners" unique_id=1426752088 instance=ExtResource("1_wvewk")]
+position = Vector2(-526, 132)
+
+[node name="Spawner4" parent="spawners" unique_id=1479299280 instance=ExtResource("1_wvewk")]
+position = Vector2(489, -66)
+
+[node name="Spawner5" parent="spawners" unique_id=191746906 instance=ExtResource("1_wvewk")]
+position = Vector2(491, 63)
