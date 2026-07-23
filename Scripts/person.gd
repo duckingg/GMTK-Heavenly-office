@@ -14,6 +14,7 @@ func _process(delta: float) -> void:
 		$".".position.x += delta * speed * 100
 	elif direction == "R-L":
 		$".".position.x -= delta * speed * 100
+		$Sprite2D.flip_h = true
 
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
