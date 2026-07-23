@@ -11,4 +11,5 @@ script = ExtResource("2_qj2jc")
 
 [node name="Second_hand" type="Sprite2D" parent="." unique_id=2104889403]
 texture_filter = 1
+rotation = 6.2831855
 texture = ExtResource("3_1ubeg")

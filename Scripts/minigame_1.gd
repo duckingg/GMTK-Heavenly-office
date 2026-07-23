@@ -7,6 +7,10 @@ var ID = 1
 var spawn_dealy : float
 var person_speed : float
 
+func _input(event):
+	if event is InputEventMouseButton and event.pressed:
+		print("Viewport received click")
+
 func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("ui_accept"):

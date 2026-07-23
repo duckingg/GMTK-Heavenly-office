@@ -10,6 +10,7 @@ func _ready() -> void:
 @export var person_ID: int
 
 func _process(delta: float) -> void:
+	$Sprite2D.speed_scale = speed
 	if direction == "L-R":
 		$".".position.x += delta * speed * 100
 	elif direction == "R-L":
