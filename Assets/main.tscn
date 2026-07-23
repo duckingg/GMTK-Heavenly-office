@@ -1,16 +1,35 @@
-[gd_scene format=3 uid="uid://c6bdegeb7h14v"]
+[gd_scene format=3 uid="uid://dt8uian6uijn"]
 
 [ext_resource type="PackedScene" uid="uid://dxkokcej7bbgl" path="res://Assets/Clock.tscn" id="1_fhhcb"]
-[ext_resource type="Script" uid="uid://cdxhhdxtrfjvn" path="res://Assets/main.gd" id="1_yjg56"]
-[ext_resource type="PackedScene" uid="uid://dlj0qwyskaxbk" path="res://Assets/spawner.tscn" id="3_h46cc"]
+[ext_resource type="PackedScene" uid="uid://dax3icskph0gg" path="res://Assets/minigame_1.tscn" id="2_yjg56"]
 
-[node name="Main" type="Node2D" unique_id=1772978284]
-script = ExtResource("1_yjg56")
+[node name="Main" type="Node2D" unique_id=1996568878]
 
 [node name="Clock" parent="." unique_id=993132611 instance=ExtResource("1_fhhcb")]
+position = Vector2(500, -286)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1578918322]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=526821664]
+position = Vector2(755, -415)
 zoom = Vector2(2, 2)
 
-[node name="Spawner" parent="." unique_id=569710735 instance=ExtResource("3_h46cc")]
-position = Vector2(174, -2)
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1102488445]
+
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1707037977]
+offset_left = 700.0
+offset_top = 249.8
+offset_right = 1074.315
+offset_bottom = 623.8005
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/Panel" unique_id=309560938]
+layout_mode = 0
+offset_left = 7.3149996
+offset_top = 6.0
+offset_right = 367.315
+offset_bottom = 366.0
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/Panel/SubViewportContainer" unique_id=257118176]
+handle_input_locally = false
+size = Vector2i(360, 360)
+render_target_update_mode = 4
+
+[node name="Minigame1" parent="CanvasLayer/Panel/SubViewportContainer/SubViewport" unique_id=1364003204 instance=ExtResource("2_yjg56")]

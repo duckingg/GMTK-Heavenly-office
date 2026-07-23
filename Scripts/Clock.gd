@@ -11,9 +11,6 @@ var time = 60.0
 var current_tween : Tween
 var editing = false
 
-func _ready() -> void:
-	print(get_children())
-
 func _process(delta):
 	if editing == true:
 		second = 0.9
@@ -33,7 +30,9 @@ func _process(delta):
 		time -= 10
 		time_update("edit")
 
-
+func edit_time(amount):
+	time += amount
+	time_update("edit")
 
 func time_update(type):
 	if current_tween:

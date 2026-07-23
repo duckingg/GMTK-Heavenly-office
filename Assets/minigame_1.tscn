@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dax3icskph0gg"]
 
-[ext_resource type="Script" uid="uid://djaeapxfpigw4" path="res://Assets/minigame_1.gd" id="1_usdcs"]
+[ext_resource type="Script" uid="uid://djaeapxfpigw4" path="res://Scripts/minigame_1.gd" id="1_usdcs"]
 [ext_resource type="PackedScene" uid="uid://dlj0qwyskaxbk" path="res://Assets/spawner.tscn" id="1_wvewk"]
 
 [node name="Minigame1" type="Node2D" unique_id=1364003204]
