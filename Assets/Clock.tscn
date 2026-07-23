@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dxkokcej7bbgl"]
 
-[ext_resource type="Texture2D" uid="uid://8f8xv2ffeaiu" path="res://Sprites/Clock.png" id="1_qj2jc"]
-[ext_resource type="Texture2D" uid="uid://c358y8ffhdofm" path="res://icon.svg" id="1_r3var"]
+[ext_resource type="Texture2D" uid="uid://drcuf48wpfaed" path="res://Sprites/Clock2.png" id="1_qj2jc"]
 [ext_resource type="Script" uid="uid://ckpfbpuv07ouw" path="res://Scripts/Clock.gd" id="2_qj2jc"]
+[ext_resource type="Texture2D" uid="uid://c1xsd7fu6tkvs" path="res://Sprites/clock arm.png" id="3_1ubeg"]
 
 [node name="Clock" type="Sprite2D" unique_id=993132611]
 texture_filter = 1
@@ -10,5 +10,5 @@ texture = ExtResource("1_qj2jc")
 script = ExtResource("2_qj2jc")
 
 [node name="Second_hand" type="Sprite2D" parent="." unique_id=2104889403]
-scale = Vector2(0.07421875, 0.3671875)
-texture = ExtResource("1_r3var")
+texture_filter = 1
+texture = ExtResource("3_1ubeg")
