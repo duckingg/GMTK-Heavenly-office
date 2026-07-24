@@ -10,6 +10,7 @@ extends Sprite2D
 var second = 0
 var time = 60.0
 var game_over = false
+var paused = false
 
 var current_tween : Tween
 var editing = false
@@ -18,7 +19,7 @@ func _process(delta):
 	if editing == true:
 		second = 0.9
 		
-	if editing == false:
+	if editing == false and paused == false:
 		second += delta
 		
 		if second >= 1 and time > 0:
@@ -31,13 +32,20 @@ func _process(delta):
 			$BELL.play()
 			$AudioStreamPlayer.stop()
 	
+	
 	if Input.is_action_just_pressed("ui_up"):
 		time += 10
 		time_update("edit")
 	if Input.is_action_just_pressed("ui_down"):
 		time -= 10
 		time_update("edit")
-
+	if Input.is_action_just_pressed("ui_right") and paused == false:
+		paused = true
+		print (paused)
+	elif Input.is_action_just_pressed("ui_right") and paused == true:
+		paused = false
+		print (paused)
+	
 func edit_time(amount):
 	time += amount
 	time_update("edit")

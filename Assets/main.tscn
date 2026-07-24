@@ -1,49 +1,58 @@
 [gd_scene format=3 uid="uid://dt8uian6uijn"]
 
+[ext_resource type="Script" uid="uid://cu8yycm4ob648" path="res://Scripts/camera_2d.gd" id="1_2e4wo"]
 [ext_resource type="PackedScene" uid="uid://dxkokcej7bbgl" path="res://Assets/Clock.tscn" id="1_fhhcb"]
-[ext_resource type="Script" uid="uid://cgrs0bytb2hos" path="res://Scripts/panel.gd" id="1_h46cc"]
+[ext_resource type="Texture2D" uid="uid://ofqafagvqv3d" path="res://Sprites/sticker.png" id="2_m0djy"]
 [ext_resource type="PackedScene" uid="uid://dax3icskph0gg" path="res://Assets/minigame_1.tscn" id="2_yjg56"]
+[ext_resource type="Texture2D" uid="uid://c0xl53j0engtf" path="res://Sprites/TV.png" id="4_2e4wo"]
 
 [node name="Main" type="Node2D" unique_id=1996568878]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=526821664]
-position = Vector2(-293, -167)
-zoom = Vector2(2, 2)
+[node name="Camera2D" type="Camera2D" parent="." unique_id=874507491]
+script = ExtResource("1_2e4wo")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1102488445]
-
-[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1707037977]
+[node name="Panel" type="Panel" parent="." unique_id=1707037977]
 texture_filter = 1
-offset_left = 700.0
-offset_top = 249.8
-offset_right = 1074.315
-offset_bottom = 623.8005
+offset_left = 296.575
+offset_top = -200.0
+offset_right = 726.9573
+offset_bottom = 235.94928
 scale = Vector2(0.395, 0.395)
 mouse_filter = 1
-script = ExtResource("1_h46cc")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/Panel" unique_id=309560938]
+[node name="Explainer" type="Sprite2D" parent="Panel" unique_id=529548081]
+z_index = 1
+position = Vector2(4.196167e-05, 58.734165)
+rotation = -0.15707964
+scale = Vector2(5.33, 5.33)
+texture = ExtResource("2_m0djy")
+
+[node name="person_showcase" type="Sprite2D" parent="Panel/Explainer" unique_id=594674801]
+
+[node name="TV" type="Sprite2D" parent="Panel" unique_id=1959646515]
+position = Vector2(230.37988, 200.50629)
+scale = Vector2(2.592505, 2.9089587)
+texture = ExtResource("4_2e4wo")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Panel" unique_id=309560938]
 texture_filter = 1
 layout_mode = 0
-offset_left = 7.3149996
-offset_top = 6.0
-offset_right = 367.315
-offset_bottom = 366.0
+offset_left = 17.72145
+offset_top = 20.759499
+offset_right = 377.72144
+offset_bottom = 380.7595
 
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/Panel/SubViewportContainer" unique_id=257118176]
+[node name="SubViewport" type="SubViewport" parent="Panel/SubViewportContainer" unique_id=257118176]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 physics_object_picking = true
 size = Vector2i(360, 360)
 render_target_update_mode = 4
 
-[node name="Minigame1" parent="CanvasLayer/Panel/SubViewportContainer/SubViewport" unique_id=1364003204 instance=ExtResource("2_yjg56")]
+[node name="Minigame1" parent="Panel/SubViewportContainer/SubViewport" unique_id=1364003204 instance=ExtResource("2_yjg56")]
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1708058102]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1708058102]
 
-[node name="Clock" parent="CanvasLayer2" unique_id=993132611 instance=ExtResource("1_fhhcb")]
+[node name="Clock" parent="CanvasLayer" unique_id=993132611 instance=ExtResource("1_fhhcb")]
 position = Vector2(87, 569)
 scale = Vector2(2, 2)
-
-[connection signal="mouse_entered" from="CanvasLayer/Panel" to="CanvasLayer/Panel" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/Panel" to="CanvasLayer/Panel" method="_on_mouse_exited"]

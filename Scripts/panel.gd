@@ -3,6 +3,7 @@ extends Panel
 var hover_tween: Tween
 
 var original_scale = $".".scale
+var original_pos = $".".global_position
 
 func _on_mouse_entered() -> void:
 	if hover_tween:
