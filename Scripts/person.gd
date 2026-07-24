@@ -11,6 +11,10 @@ var body_parts = {
 
 var person_code : int
 
+@export var lifetime: int
+@export var direction:  String
+@export var speed: float
+@export var person_ID: int
 
 func _ready() -> void:
 	randomize()
@@ -21,8 +25,28 @@ func _ready() -> void:
 	var e : int = randi_range(1, 2) # Arm type
 	var f : int = randi_range(1, 5) # Leg color
 	
+	spawn_person(a,b,c,d,e,f, "walk")
+	
+	if direction == "R-L":
+		$Node/hands.flip_h = true
+		$Node/legs.flip_h = true
+		$Node/hair.flip_h = true
+		$Node/head.flip_h = true
+		$Node/body.flip_h = true
+	
+	z_index = $".".global_position.y
+	await get_tree().create_timer(lifetime).timeout
+	queue_free()
+
+func spawn_person(a,b,c,d,e,f, mode):
 	var shirt_color
 	var head_color
+	
+	if mode == "pause":
+		$Node/hands.pause()
+		$Node/legs.pause()
+	elif mode == "walk":
+		pass
 	
 	if a == 2:
 		$Node/hair.texture = body_parts["hair_1"]
@@ -42,27 +66,27 @@ func _ready() -> void:
 		$Node/head.modulate = Color.BURLYWOOD
 		head_color = "BURLYWOOD"
 	elif c == 2:
-		$Node/head.modulate = Color.SANDY_BROWN
-		head_color = "SANDY_BROWN"
+		$Node/head.modulate = Color.PERU
+		head_color = "PERU"
 	elif c == 3:
 		$Node/head.modulate = Color.SADDLE_BROWN
 		head_color = "SADDLE_BROWN"
 	
 	if d == 1:
-		$Node/body.modulate = Color.GRAY
-		shirt_color = "GRAY"
+		$Node/body.modulate = Color.WEB_GRAY
+		shirt_color = "WEB_GRAY"
 	elif d == 2:
-		$Node/body.modulate = Color.DARK_RED
-		shirt_color = "DARK_RED"
+		$Node/body.modulate = Color.INDIAN_RED
+		shirt_color = "INDIAN_RED"
 	elif d == 3:
-		$Node/body.modulate = Color.DARK_GREEN
-		shirt_color = "DARK_GREEN"
+		$Node/body.modulate = Color.WEB_GREEN
+		shirt_color = "WEB_GREEN"
 	elif d == 4:
-		$Node/body.modulate = Color.DARK_BLUE
-		shirt_color = "DARK_BLUE"
+		$Node/body.modulate = Color.MEDIUM_BLUE
+		shirt_color = "MEDIUM_BLUE"
 	elif d == 5:
-		$Node/body.modulate = Color.BLACK
-		shirt_color = "BLACK"
+		$Node/body.modulate = Color.DIM_GRAY
+		shirt_color = "DIM_GRAY"
 	
 	if e == 1:
 		$Node/hands.modulate = Color.from_string(shirt_color, Color.WHITE)
@@ -70,7 +94,7 @@ func _ready() -> void:
 		$Node/hands.modulate = Color.from_string(head_color, Color.WHITE)
 	
 	if f == 1:
-		$Node/legs.modulate = Color.GRAY
+		$Node/legs.modulate = Color.LIGHT_SLATE_GRAY
 	if f == 2:
 		$Node/legs.modulate = Color.DARK_RED
 	if f == 3:
@@ -80,14 +104,8 @@ func _ready() -> void:
 	if f == 5:
 		$Node/legs.modulate = Color.BLACK
 	
-	z_index = $".".global_position.y
-	await get_tree().create_timer(lifetime).timeout
-	queue_free()
-
-@export var lifetime: int
-@export var direction:  String
-@export var speed: float
-@export var person_ID: int
+	person_code = int( str(a) + str(b) + str(c) + str(d) + str(e) + str(f) )
+	
 
 func _process(delta: float) -> void:
 	$Node/hands.speed_scale = speed
@@ -103,5 +121,6 @@ func _process(delta: float) -> void:
 		$Node/body.flip_h = true
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		print(person_ID)
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+				print(person_code)

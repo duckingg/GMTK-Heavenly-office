@@ -3,11 +3,13 @@ extends Sprite2D
 @export var Tick_start_time = 30
 @export var scale_start_time = 15.0
 @export var scale_stop_time = 5.0
+@export var original_scale = 3
 
 @onready var second_hand = $Second_hand
 
 var second = 0
 var time = 60.0
+var game_over = false
 
 var current_tween : Tween
 var editing = false
@@ -19,10 +21,15 @@ func _process(delta):
 	if editing == false:
 		second += delta
 		
-		if second >= 1:
+		if second >= 1 and time > 0:
+			game_over = false
 			second = 0
 			time -= 1
 			time_update("normal")
+		elif time <= 0 and game_over == false:
+			game_over = true
+			$BELL.play()
+			$AudioStreamPlayer.stop()
 	
 	if Input.is_action_just_pressed("ui_up"):
 		time += 10
@@ -63,7 +70,8 @@ func time_update(type):
 			current_tween.tween_property(
 				self,
 				"scale",
-				Vector2( scale_start_time/time , scale_start_time/time ),
+				Vector2( original_scale * (scale_start_time/time) ,
+				 original_scale * (scale_start_time/time) ),
 				0.9
 			)
 		elif time > scale_start_time:
@@ -72,16 +80,17 @@ func time_update(type):
 			current_tween.tween_property(
 				self,
 				"scale",
-				Vector2( 1, 1 ),
+				Vector2( original_scale, original_scale ),
 				0.9
 			)
 		elif time < scale_stop_time:
-			$AudioStreamPlayer.volume_linear = 1
+			$AudioStreamPlayer.volume_linear = scale_start_time/scale_stop_time
 			current_tween.parallel()
 			current_tween.tween_property(
 				self,
 				"scale",
-				Vector2( scale_start_time/scale_stop_time , scale_start_time/scale_stop_time ),
+				Vector2( original_scale * (scale_start_time/scale_stop_time),
+				original_scale * (scale_start_time/scale_stop_time) ),
 				0.9
 			)
 		
