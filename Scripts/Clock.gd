@@ -1,7 +1,8 @@
 extends Sprite2D
 
 @export var Tick_start_time = 30
-@export var scale_start_time = 15
+@export var scale_start_time = 15.0
+@export var scale_stop_time = 5.0
 
 @onready var second_hand = $Second_hand
 
@@ -45,6 +46,7 @@ func time_update(type):
 	if type == "normal":
 		if time <= Tick_start_time:
 			current_tween.set_trans(Tween.TRANS_ELASTIC)
+			$AudioStreamPlayer.play(0.2)
 		else:
 			current_tween.set_trans(Tween.TRANS_LINEAR)
 		
@@ -55,7 +57,8 @@ func time_update(type):
 			0.9
 		)
 		
-		if time <= scale_start_time and time > scale_start_time / 5.0:
+		if time <= scale_start_time and time >= scale_stop_time:
+			$AudioStreamPlayer.volume_linear = scale_start_time/time
 			current_tween.parallel()
 			current_tween.tween_property(
 				self,
@@ -64,6 +67,7 @@ func time_update(type):
 				0.9
 			)
 		elif time > scale_start_time:
+			$AudioStreamPlayer.volume_linear = 0.5
 			current_tween.parallel()
 			current_tween.tween_property(
 				self,
@@ -71,6 +75,18 @@ func time_update(type):
 				Vector2( 1, 1 ),
 				0.9
 			)
+		elif time < scale_stop_time:
+			$AudioStreamPlayer.volume_linear = 1
+			current_tween.parallel()
+			current_tween.tween_property(
+				self,
+				"scale",
+				Vector2( scale_start_time/scale_stop_time , scale_start_time/scale_stop_time ),
+				0.9
+			)
+		
+		await current_tween.finished
+		$AudioStreamPlayer.stop()
 		
 		print(time)
 		
