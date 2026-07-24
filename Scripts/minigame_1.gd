@@ -19,29 +19,29 @@ func _process(_delta: float) -> void:
 		spawn_dealy = randf_range(0.0, 0.5)
 		await get_tree().create_timer(spawn_dealy).timeout
 		person_speed = randf_range( min_speed , max_speed)
-		$spawners/Spawner.spawn_person("L-R", person_speed, ID)
+		$spawners/Spawner.spawn_person("L-R", person_speed, ID, 25)
 		ID += 1
 		
 		spawn_dealy = randf_range(0.0, 0.5)
 		await get_tree().create_timer(spawn_dealy).timeout
 		person_speed = randf_range( min_speed , max_speed)
-		$spawners/Spawner2.spawn_person("L-R", person_speed, ID)
+		$spawners/Spawner2.spawn_person("L-R", person_speed, ID, 25)
 		ID += 1
 		
 		spawn_dealy = randf_range(0.0, 0.5)
 		await get_tree().create_timer(spawn_dealy).timeout
 		person_speed = randf_range( min_speed , max_speed)
-		$spawners/Spawner3.spawn_person("L-R", person_speed, ID)
+		$spawners/Spawner3.spawn_person("L-R", person_speed, ID, 25)
 		ID += 1
 		
 		spawn_dealy = randf_range(0.0, 0.5)
 		await get_tree().create_timer(spawn_dealy).timeout
 		person_speed = randf_range( min_speed , max_speed)
-		$spawners/Spawner4.spawn_person("R-L", person_speed, ID)
+		$spawners/Spawner4.spawn_person("R-L", person_speed, ID, 25)
 		ID += 1
 		
 		spawn_dealy = randf_range(0.0, 0.5)
 		await get_tree().create_timer(spawn_dealy).timeout
 		person_speed = randf_range( min_speed , max_speed)
-		$spawners/Spawner5.spawn_person("R-L", person_speed, ID)
+		$spawners/Spawner5.spawn_person("R-L", person_speed, ID, 25)
 		ID += 1
